@@ -8,11 +8,13 @@ class ActivityPresenterTest {
 
     @Mock
     lateinit var view: MainActivityContract.View
+    lateinit var presenter: ActivityPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        presenter = ActivityPresenter()
     }
 
-    
+
 }
