@@ -33,4 +33,8 @@ dependencies {
     implementation rxjava.kotlin
     implementation rxjava.bindings
     implementation rxjava.android
+    testImplementation mockito.lib
+    testImplementation mockito.android
+    testImplementation hamcrest.lib
+
 }
