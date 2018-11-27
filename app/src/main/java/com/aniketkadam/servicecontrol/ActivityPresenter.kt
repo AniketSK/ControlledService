@@ -1,6 +1,6 @@
 package com.aniketkadam.servicecontrol
 
-class ActivityPresenter : Presenter {
+class ActivityPresenter : MainActivityContract.Presenter {
     override fun onStart() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
