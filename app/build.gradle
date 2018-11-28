@@ -34,7 +34,7 @@ dependencies {
     implementation rxjava.bindings
     implementation rxjava.android
     testImplementation mockito.lib
-    testImplementation mockito.android
+    androidTestImplementation mockito.android
     testImplementation hamcrest.lib
 
 }
