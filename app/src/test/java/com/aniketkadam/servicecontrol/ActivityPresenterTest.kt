@@ -1,6 +1,7 @@
 package com.aniketkadam.servicecontrol
 
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -33,4 +34,22 @@ class ActivityPresenterTest {
 
         verify(view).serviceRun(true)
     }
+
+    @Test
+    fun `when the toggle is switched off, the service stops`() {
+
+        // Now we need to be able to simulate toggling of the switch,
+        // to this end, we create a subscription that we control and can then pass whatever values we want later.
+        val subject: PublishSubject<Boolean> = PublishSubject.create()
+        `when`(view.switchToggle()).thenReturn(subject)
+
+        presenter.onStart(view)
+
+        // Toggle is set to off
+        subject.onNext(false)
+
+        verify(view).serviceRun(false)
+    }
+
+
 }
