@@ -1,20 +1,15 @@
 package com.aniketkadam.servicecontrol.demoactivity
 
+import com.aniketkadam.servicecontrol.base.BasePresenter
 import com.aniketkadam.servicecontrol.base.models.Running
 import com.aniketkadam.servicecontrol.base.models.ServiceStates
 import com.aniketkadam.servicecontrol.base.models.ViewState
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.withLatestFrom
 
-class ActivityPresenter : MainActivityContract.Presenter {
-    val compositeDisposable: CompositeDisposable = CompositeDisposable()
+class ActivityPresenter : BasePresenter() {
 
-    override fun onStart(view: MainActivityContract.View) {
-
-        // When the view state has completed emitting (onStop) then everything should be unsubscribed.
-        autoUnsubscribe(view.viewState().doOnComplete { compositeDisposable.dispose() }.subscribe())
-
+    fun onStart(view: MainActivityContract.View) {
+        super.onStart(view)
         // Since we're in the activity, notifs are hidden. If service is off, it's notrunning.
         autoUnsubscribe(view.switchToggle()
             .map { switchOn ->
@@ -35,7 +30,4 @@ class ActivityPresenter : MainActivityContract.Presenter {
 
     }
 
-    fun autoUnsubscribe(disposable: Disposable) {
-        compositeDisposable.add(disposable)
-    }
 }

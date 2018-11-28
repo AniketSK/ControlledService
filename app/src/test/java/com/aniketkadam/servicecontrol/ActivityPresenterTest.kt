@@ -85,13 +85,13 @@ class ActivityPresenterTest {
 
         presenter.onStart(view)
 
-        assertThat("is empty before disposing of it", presenter.compositeDisposable.size() != 0)
+        assertThat("is empty before disposing of it", presenter.getDisposable().size() != 0)
 
         viewStateSubject.onNext(ViewState.Stopping(true))
         viewStateSubject.onComplete()
 
-        assertThat("was not disposed", presenter.compositeDisposable.isDisposed)
-        assertThat("is empty", presenter.compositeDisposable.size() == 0)
+        assertThat("was not disposed", presenter.getDisposable().isDisposed)
+        assertThat("is empty", presenter.getDisposable().size() == 0)
 
     }
 }
