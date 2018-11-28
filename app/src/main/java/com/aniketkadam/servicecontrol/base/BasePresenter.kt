@@ -2,6 +2,7 @@ package com.aniketkadam.servicecontrol.base
 
 import androidx.annotation.CallSuper
 import androidx.annotation.RestrictTo
+import com.aniketkadam.servicecontrol.base.mvp.IBaseView
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

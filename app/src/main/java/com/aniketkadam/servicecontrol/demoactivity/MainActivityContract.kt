@@ -1,10 +1,8 @@
 package com.aniketkadam.servicecontrol.demoactivity
 
-import com.aniketkadam.servicecontrol.base.IBaseView
+import com.aniketkadam.servicecontrol.base.mvp.IBaseView
 import com.aniketkadam.servicecontrol.base.models.ServiceStates
-import com.aniketkadam.servicecontrol.base.models.ViewState
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 
 interface MainActivityContract {
 

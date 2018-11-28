@@ -3,9 +3,12 @@ package com.aniketkadam.servicecontrol.base
 import android.support.v7.app.AppCompatActivity
 import androidx.annotation.CallSuper
 import com.aniketkadam.servicecontrol.base.models.ViewState
+import com.aniketkadam.servicecontrol.base.mvp.IBasePresenter
+import com.aniketkadam.servicecontrol.base.mvp.IBaseView
 import io.reactivex.subjects.PublishSubject
 
-abstract class BaseActivity<T : IBasePresenter> : AppCompatActivity(), IBaseView {
+abstract class BaseActivity<T : IBasePresenter> : AppCompatActivity(),
+    IBaseView {
 
     private lateinit var presenter: IBasePresenter
     protected val viewStatePublishSubject = PublishSubject.create<ViewState>()
