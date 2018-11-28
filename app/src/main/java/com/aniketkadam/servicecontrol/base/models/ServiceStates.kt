@@ -1,4 +1,4 @@
-package com.aniketkadam.servicecontrol
+package com.aniketkadam.servicecontrol.base.models
 
 /**
  * We want to represent all valid states of the service:

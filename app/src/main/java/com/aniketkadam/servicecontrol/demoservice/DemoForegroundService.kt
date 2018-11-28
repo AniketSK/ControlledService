@@ -1,4 +1,4 @@
-package com.aniketkadam.servicecontrol
+package com.aniketkadam.servicecontrol.demoservice
 
 import android.app.Service
 import android.content.Intent

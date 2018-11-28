@@ -1,5 +1,8 @@
-package com.aniketkadam.servicecontrol
+package com.aniketkadam.servicecontrol.demoactivity
 
+import com.aniketkadam.servicecontrol.base.models.Running
+import com.aniketkadam.servicecontrol.base.models.ServiceStates
+import com.aniketkadam.servicecontrol.base.models.ViewState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.withLatestFrom

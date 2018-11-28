@@ -1,4 +1,4 @@
-package com.aniketkadam.servicecontrol
+package com.aniketkadam.servicecontrol.base.models
 
 /**
  * The various states the activity can be in.

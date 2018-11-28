@@ -1,5 +1,7 @@
-package com.aniketkadam.servicecontrol
+package com.aniketkadam.servicecontrol.demoactivity
 
+import com.aniketkadam.servicecontrol.base.models.ServiceStates
+import com.aniketkadam.servicecontrol.base.models.ViewState
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 

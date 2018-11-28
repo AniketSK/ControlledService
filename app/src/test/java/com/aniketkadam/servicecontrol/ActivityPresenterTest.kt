@@ -1,5 +1,10 @@
 package com.aniketkadam.servicecontrol
 
+import com.aniketkadam.servicecontrol.base.models.Running
+import com.aniketkadam.servicecontrol.base.models.ServiceStates
+import com.aniketkadam.servicecontrol.base.models.ViewState
+import com.aniketkadam.servicecontrol.demoactivity.ActivityPresenter
+import com.aniketkadam.servicecontrol.demoactivity.MainActivityContract
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import org.hamcrest.MatcherAssert.assertThat

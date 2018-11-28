@@ -1,7 +1,8 @@
-package com.aniketkadam.servicecontrol
+package com.aniketkadam.servicecontrol.demoactivity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.aniketkadam.servicecontrol.R
 
 class MainActivity : AppCompatActivity() {
 
