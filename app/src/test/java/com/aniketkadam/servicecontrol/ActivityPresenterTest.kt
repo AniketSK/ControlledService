@@ -5,6 +5,7 @@ import com.aniketkadam.servicecontrol.base.models.ServiceStates
 import com.aniketkadam.servicecontrol.base.models.ViewState
 import com.aniketkadam.servicecontrol.demoactivity.ActivityPresenter
 import com.aniketkadam.servicecontrol.demoactivity.MainActivityContract
+import com.aniketkadam.servicecontrol.demoactivity.model.DataSource
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import org.hamcrest.MatcherAssert.assertThat
@@ -23,6 +24,7 @@ class ActivityPresenterTest {
     @Mock
     lateinit var dataSource: DataSource
     lateinit var presenter: ActivityPresenter
+    lateinit var switchToggle: PublishSubject<Boolean>
 
     @Before
     fun setUp() {

@@ -7,6 +7,7 @@ import com.aniketkadam.servicecontrol.base.extensions.exhaustive
 import com.aniketkadam.servicecontrol.base.models.Running
 import com.aniketkadam.servicecontrol.base.models.ServiceStates
 import com.aniketkadam.servicecontrol.base.mvp.IBasePresenter
+import com.aniketkadam.servicecontrol.demoactivity.model.PreferenceDataSource
 import com.aniketkadam.servicecontrol.demoservice.DemoForegroundService
 import com.jakewharton.rxbinding3.widget.checkedChanges
 import io.reactivex.Observable
@@ -37,8 +38,4 @@ class MainActivity : BaseActivity<ActivityPresenter>(), MainActivityContract.Vie
         return ActivityPresenter(PreferenceDataSource(this))
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
 }
