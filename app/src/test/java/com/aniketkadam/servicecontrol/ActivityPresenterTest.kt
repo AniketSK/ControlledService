@@ -51,4 +51,13 @@ class ActivityPresenterTest {
         verify(view).serviceRun(ServiceStates.NotRunning) // Service is not running since it was toggled off
     }
 
+    @Test
+    fun `when the activity stops, if the service is still running, the notification is shown`() {
+        `when`(view.switchToggle()).thenReturn(Observable.just(true)) // Service should be running
+
+        presenter.onStart(view)
+        presenter.onStop(true) // The view is stopping and it was doing so to finish not rotate.
+
+        verify(view).serviceRun(Running.NotificationVisible) // Keep the service running, with the notification
+    }
 }
