@@ -7,7 +7,9 @@ class ActivityPresenter : MainActivityContract.Presenter {
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onStart(view: MainActivityContract.View) {
-        autoUnsubscribe(view.switchToggle() // Since we're in the activity, notif's are hidden. If service is off, it's notrunning.
+
+        // Since we're in the activity, notifs are hidden. If service is off, it's notrunning.
+        autoUnsubscribe(view.switchToggle()
             .map { switchOn ->
                 if (switchOn) Running.NotificationHidden else ServiceStates.NotRunning
 
