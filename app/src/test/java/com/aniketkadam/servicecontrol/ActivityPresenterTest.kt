@@ -20,13 +20,17 @@ class ActivityPresenterTest {
     // Mocking creates an object out of an interface, but sets everything in it to null.
     @Mock
     lateinit var view: MainActivityContract.View
+    @Mock
+    lateinit var dataSource: DataSource
     lateinit var presenter: ActivityPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         `when`(view.viewState()).thenReturn(PublishSubject.create())
-        presenter = ActivityPresenter()
+        switchToggle = PublishSubject.create()
+        `when`(view.switchToggle()).thenReturn(switchToggle)
+        presenter = ActivityPresenter(dataSource)
     }
 
     @Test
@@ -93,5 +97,25 @@ class ActivityPresenterTest {
         assertThat("was not disposed", presenter.getDisposable().isDisposed)
         assertThat("is empty", presenter.getDisposable().size() == 0)
 
+    }
+
+    @Test
+    fun `switch state is set when the view is begun`() {
+        `when`(view.switchToggle()).thenReturn(Observable.just(true))
+        `when`(dataSource.isServiceActive()).thenReturn(true)
+
+        presenter.onStart(view)
+
+        verify(view).setSwitchChecked(true)
+    }
+
+    @Test
+    fun `when the switch is toggled, the state is saved in the data store`() {
+        `when`(view.switchToggle()).thenReturn(Observable.just(true))
+        `when`(dataSource.isServiceActive()).thenReturn(true)
+
+        switchToggle.onNext(true)
+
+        verify(dataSource).setServiceActive(true)
     }
 }

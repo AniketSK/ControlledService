@@ -4,12 +4,16 @@ import com.aniketkadam.servicecontrol.base.BasePresenter
 import com.aniketkadam.servicecontrol.base.models.Running
 import com.aniketkadam.servicecontrol.base.models.ServiceStates
 import com.aniketkadam.servicecontrol.base.models.ViewState
+import com.aniketkadam.servicecontrol.demoactivity.model.DataSource
 import io.reactivex.rxkotlin.withLatestFrom
 
-class ActivityPresenter : BasePresenter() {
+class ActivityPresenter(val dataSource: DataSource) : BasePresenter() {
 
     fun onStart(view: MainActivityContract.View) {
         super.onStart(view)
+
+        // Initialize the view
+        view.setSwitchChecked(dataSource.isServiceActive())
         // Since we're in the activity, notifs are hidden. If service is off, it's notrunning.
         autoUnsubscribe(view.switchToggle()
             .map { switchOn ->

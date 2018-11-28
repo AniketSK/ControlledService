@@ -13,6 +13,16 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<ActivityPresenter>(), MainActivityContract.View {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+    override fun setSwitchChecked(checked: Boolean) {
+        serviceActivationSwitch.isChecked = checked
+    }
+
     override fun switchToggle(): Observable<Boolean> = serviceActivationSwitch.checkedChanges()
 
     override fun serviceRun(serviceStates: ServiceStates) = when (serviceStates) {
@@ -24,7 +34,7 @@ class MainActivity : BaseActivity<ActivityPresenter>(), MainActivityContract.Vie
     }.exhaustive
 
     override fun getPresenter(): IBasePresenter {
-        return ActivityPresenter()
+        return ActivityPresenter(PreferenceDataSource(this))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

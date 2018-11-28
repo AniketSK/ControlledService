@@ -9,5 +9,6 @@ interface MainActivityContract {
     interface View : IBaseView {
         fun switchToggle(): Observable<Boolean>
         fun serviceRun(serviceStates: ServiceStates)
+        fun setSwitchChecked(checked: Boolean)
     }
 }
