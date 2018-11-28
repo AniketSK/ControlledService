@@ -11,6 +11,6 @@ interface MainActivityContract {
     interface View {
         fun switchToggle(): Observable<Boolean>
         fun notificationButtonClick(): Observable<Unit>
-        fun serviceRun(boolean: Boolean)
+        fun serviceRun(serviceStates: ServiceStates)
     }
 }

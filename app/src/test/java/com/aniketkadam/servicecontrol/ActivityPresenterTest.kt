@@ -23,7 +23,7 @@ class ActivityPresenterTest {
     }
 
     @Test
-    fun `when the activity starts if the toggle is on, service starts`() {
+    fun `when the activity starts if the toggle is on, service starts and notification is hidden`() {
 
         /* Since we have a 'mock' of a view, we need to define exact what each of its functions and fields return
         * In this case, since the interface defines an observable must be returned for switch toggle,
@@ -32,7 +32,7 @@ class ActivityPresenterTest {
 
         presenter.onStart(view)
 
-        verify(view).serviceRun(true)
+        verify(view).serviceRun(Running.NotificationHidden) // Service is running but notification is hidden
     }
 
     @Test
@@ -48,8 +48,7 @@ class ActivityPresenterTest {
         // Toggle is set to off
         subject.onNext(false)
 
-        verify(view).serviceRun(false)
+        verify(view).serviceRun(ServiceStates.NotRunning) // Service is not running since it was toggled off
     }
-
 
 }
