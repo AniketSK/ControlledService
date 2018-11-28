@@ -2,6 +2,7 @@ package com.aniketkadam.servicecontrol
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.withLatestFrom
 
 class ActivityPresenter : MainActivityContract.Presenter {
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
@@ -16,6 +17,16 @@ class ActivityPresenter : MainActivityContract.Presenter {
             }
             .subscribe { view.serviceRun(it) }
         )
+
+        // If it's stopping, and the service is supposed to be on, show the notification.
+        autoUnsubscribe(
+            view.viewState()
+                .withLatestFrom(view.switchToggle())
+                .filter { (vs, serviceOn) -> vs == ViewState.Stopping(true) && serviceOn }
+                .map { Running.NotificationVisible }
+                .subscribe { view.serviceRun(it) }
+        )
+
     }
 
     fun autoUnsubscribe(disposable: Disposable) {
