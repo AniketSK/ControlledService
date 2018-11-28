@@ -2,6 +2,7 @@ package com.aniketkadam.servicecontrol
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -65,5 +66,27 @@ class ActivityPresenterTest {
         viewStateSubject.onNext(ViewState.Stopping(true)) // The view is stopping and it was doing so to finish not rotate.
 
         verify(view).serviceRun(Running.NotificationVisible) // Keep the service running, with the notification
+    }
+
+    @Test
+    fun `when the activity stops, all subscriptions are released`() {
+
+        val switchToggle = Observable.just(true)
+        `when`(view.switchToggle()).thenReturn(switchToggle)
+
+        val viewStateSubject: PublishSubject<ViewState> = PublishSubject.create()
+        `when`(view.viewState()).thenReturn(viewStateSubject)
+
+
+        presenter.onStart(view)
+
+        assertThat("is empty before disposing of it", presenter.compositeDisposable.size() != 0)
+
+        viewStateSubject.onNext(ViewState.Stopping(true))
+        viewStateSubject.onComplete()
+
+        assertThat("was not disposed", presenter.compositeDisposable.isDisposed)
+        assertThat("is empty", presenter.compositeDisposable.size() == 0)
+
     }
 }
