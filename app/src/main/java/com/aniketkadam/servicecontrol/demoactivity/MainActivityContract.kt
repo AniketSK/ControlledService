@@ -8,7 +8,6 @@ interface MainActivityContract {
 
     interface View : IBaseView {
         fun switchToggle(): Observable<Boolean>
-        fun notificationButtonClick(): Observable<Unit>
         fun serviceRun(serviceStates: ServiceStates)
     }
 }
