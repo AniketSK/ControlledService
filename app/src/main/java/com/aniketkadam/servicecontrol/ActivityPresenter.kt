@@ -18,11 +18,6 @@ class ActivityPresenter : MainActivityContract.Presenter {
         )
     }
 
-    override fun onStop(isFinishing: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-
     fun autoUnsubscribe(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }

@@ -6,7 +6,7 @@ import io.reactivex.subjects.PublishSubject
 interface MainActivityContract {
     interface Presenter {
         fun onStart(view: View)
-        fun onStop(isFinishing: Boolean)
+        // Stops are managed from the viewState emissions.
     }
 
     interface View {
