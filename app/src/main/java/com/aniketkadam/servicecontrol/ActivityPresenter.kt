@@ -1,8 +1,13 @@
 package com.aniketkadam.servicecontrol
 
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+
 class ActivityPresenter : MainActivityContract.Presenter {
-    override fun onStart() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    val compositeDisposable: CompositeDisposable = CompositeDisposable()
+
+    override fun onStart(view: MainActivityContract.View) {
+        autoUnsubscribe(view.switchToggle().subscribe({ view.serviceRun(it) }))
     }
 
     override fun onStop(isFinishing: Boolean) {
@@ -10,4 +15,7 @@ class ActivityPresenter : MainActivityContract.Presenter {
     }
 
 
+    fun autoUnsubscribe(disposable: Disposable) {
+        compositeDisposable.add(disposable)
+    }
 }
