@@ -5,8 +5,7 @@ import io.reactivex.subjects.PublishSubject
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 class ActivityPresenterTest {
@@ -15,10 +14,13 @@ class ActivityPresenterTest {
     @Mock
     lateinit var view: MainActivityContract.View
     lateinit var presenter: ActivityPresenter
+    @Mock
+    lateinit var mockStates: ServiceStates
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        `when`(view.viewState()).thenReturn(PublishSubject.create())
         presenter = ActivityPresenter()
     }
 
@@ -40,13 +42,13 @@ class ActivityPresenterTest {
 
         // Now we need to be able to simulate toggling of the switch,
         // to this end, we create a subscription that we control and can then pass whatever values we want later.
-        val subject: PublishSubject<Boolean> = PublishSubject.create()
-        `when`(view.switchToggle()).thenReturn(subject)
+        val switchToggle: PublishSubject<Boolean> = PublishSubject.create()
+        `when`(view.switchToggle()).thenReturn(switchToggle)
 
         presenter.onStart(view)
 
         // Toggle is set to off
-        subject.onNext(false)
+        switchToggle.onNext(false)
 
         verify(view).serviceRun(ServiceStates.NotRunning) // Service is not running since it was toggled off
     }
@@ -55,8 +57,13 @@ class ActivityPresenterTest {
     fun `when the activity stops, if the service is still running, the notification is shown`() {
         `when`(view.switchToggle()).thenReturn(Observable.just(true)) // Service should be running
 
+        val viewStateSubject: PublishSubject<ViewState> = PublishSubject.create()
+        `when`(view.viewState()).thenReturn(viewStateSubject)
+
         presenter.onStart(view)
-        presenter.onStop(true) // The view is stopping and it was doing so to finish not rotate.
+        verify(view).serviceRun(Running.NotificationHidden)
+
+        viewStateSubject.onNext(ViewState.Stopping(true)) // The view is stopping and it was doing so to finish not rotate.
 
         verify(view).serviceRun(Running.NotificationVisible) // Keep the service running, with the notification
     }
