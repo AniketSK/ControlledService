@@ -2,15 +2,16 @@ package com.aniketkadam.servicecontrol.base
 
 import androidx.annotation.CallSuper
 import androidx.annotation.RestrictTo
+import com.aniketkadam.servicecontrol.base.mvp.IBasePresenter
 import com.aniketkadam.servicecontrol.base.mvp.IBaseView
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class BasePresenter {
+abstract class BasePresenter : IBasePresenter {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     @CallSuper
-    protected fun onStart(view: IBaseView) {
+    override fun onStart(view: IBaseView) {
         // When the view state has completed emitting (onStop) then everything should be unsubscribed.
         autoUnsubscribe(view.viewState().doOnComplete { dispose() }.subscribe())
     }
