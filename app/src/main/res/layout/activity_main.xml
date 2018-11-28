@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,12 +8,20 @@
         tools:context=".demoactivity.MainActivity">
 
     <TextView
+            android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:text="Service Activate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-</android.support.constraint.ConstraintLayout>
+    <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/serviceActivationSwitch"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/label"
+            app:layout_constraintBaseline_toBaselineOf="@id/label"
+
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 package com.aniketkadam.servicecontrol.base
 
-import android.support.v7.app.AppCompatActivity
 import androidx.annotation.CallSuper
+import androidx.appcompat.app.AppCompatActivity
 import com.aniketkadam.servicecontrol.base.models.ViewState
 import com.aniketkadam.servicecontrol.base.mvp.IBasePresenter
 import com.aniketkadam.servicecontrol.base.mvp.IBaseView

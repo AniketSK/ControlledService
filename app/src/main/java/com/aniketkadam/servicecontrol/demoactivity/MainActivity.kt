@@ -1,10 +1,24 @@
 package com.aniketkadam.servicecontrol.demoactivity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.aniketkadam.servicecontrol.R
+import com.aniketkadam.servicecontrol.base.BaseActivity
+import com.aniketkadam.servicecontrol.base.models.ServiceStates
+import com.aniketkadam.servicecontrol.base.mvp.IBasePresenter
+import com.jakewharton.rxbinding3.widget.checkedChanges
+import io.reactivex.Observable
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityPresenter>(), MainActivityContract.View {
+    override fun switchToggle(): Observable<Boolean> = serviceActivationSwitch.checkedChanges()
+
+    override fun serviceRun(serviceStates: ServiceStates) {
+        
+    }
+
+    override fun getPresenter(): IBasePresenter {
+        return ActivityPresenter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
