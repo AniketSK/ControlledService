@@ -11,7 +11,7 @@ abstract class BaseActivity<T : IBasePresenter> : AppCompatActivity(),
     IBaseView {
 
     private lateinit var presenter: IBasePresenter
-    protected val viewStatePublishSubject = PublishSubject.create<ViewState>()
+    private val viewStatePublishSubject = PublishSubject.create<ViewState>()
 
     @CallSuper
     override fun onStart() {
@@ -26,6 +26,9 @@ abstract class BaseActivity<T : IBasePresenter> : AppCompatActivity(),
         viewStatePublishSubject.onNext(ViewState.Stopping(isFinishing))
         viewStatePublishSubject.onComplete()
     }
+
+    @Override
+    override fun viewState() = viewStatePublishSubject
 
     abstract fun getPresenter(): IBasePresenter
 }
