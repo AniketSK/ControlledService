@@ -12,8 +12,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 class ActivityPresenterTest {
@@ -113,11 +112,9 @@ class ActivityPresenterTest {
 
     @Test
     fun `when the switch is toggled, the state is saved in the data store`() {
-        `when`(view.switchToggle()).thenReturn(Observable.just(true))
-        `when`(dataSource.isServiceActive()).thenReturn(true)
+        presenter.onStart(view)
+        switchToggle.onNext(false)
 
-        switchToggle.onNext(true)
-
-        verify(dataSource).setServiceActive(true)
+        verify(dataSource, times(1)).setServiceActive(false)
     }
 }

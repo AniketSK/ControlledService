@@ -16,6 +16,7 @@ class ActivityPresenter(val dataSource: DataSource) : BasePresenter() {
         view.setSwitchChecked(dataSource.isServiceActive())
         // Since we're in the activity, notifs are hidden. If service is off, it's notrunning.
         autoUnsubscribe(view.switchToggle()
+            .doOnNext { dataSource.setServiceActive(it) }
             .map { switchOn ->
                 if (switchOn) Running.NotificationHidden else ServiceStates.NotRunning
 
