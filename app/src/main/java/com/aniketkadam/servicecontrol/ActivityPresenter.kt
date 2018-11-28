@@ -9,6 +9,9 @@ class ActivityPresenter : MainActivityContract.Presenter {
 
     override fun onStart(view: MainActivityContract.View) {
 
+        // When the view state has completed emitting (onStop) then everything should be unsubscribed.
+        autoUnsubscribe(view.viewState().doOnComplete { compositeDisposable.dispose() }.subscribe())
+
         // Since we're in the activity, notifs are hidden. If service is off, it's notrunning.
         autoUnsubscribe(view.switchToggle()
             .map { switchOn ->
