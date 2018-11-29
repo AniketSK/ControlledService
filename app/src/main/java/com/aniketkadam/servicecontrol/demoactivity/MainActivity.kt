@@ -6,7 +6,6 @@ import com.aniketkadam.servicecontrol.base.BaseActivity
 import com.aniketkadam.servicecontrol.base.extensions.exhaustive
 import com.aniketkadam.servicecontrol.base.models.Running
 import com.aniketkadam.servicecontrol.base.models.ServiceStates
-import com.aniketkadam.servicecontrol.base.mvp.IBasePresenter
 import com.aniketkadam.servicecontrol.demoactivity.model.PreferenceDataSource
 import com.aniketkadam.servicecontrol.demoservice.DemoForegroundService
 import com.jakewharton.rxbinding3.widget.checkedChanges
@@ -34,7 +33,7 @@ class MainActivity : BaseActivity<ActivityPresenter>(), MainActivityContract.Vie
         }
     }.exhaustive
 
-    override fun getPresenter(): IBasePresenter {
+    override fun getPresenter(): ActivityPresenter {
         return ActivityPresenter(PreferenceDataSource(this))
     }
 

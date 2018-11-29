@@ -10,7 +10,7 @@ import io.reactivex.subjects.PublishSubject
 abstract class BaseActivity<T : IBasePresenter> : AppCompatActivity(),
     IBaseView {
 
-    private lateinit var presenter: IBasePresenter
+    private lateinit var presenter: T
     private val viewStatePublishSubject = PublishSubject.create<ViewState>()
 
     @CallSuper
@@ -30,5 +30,5 @@ abstract class BaseActivity<T : IBasePresenter> : AppCompatActivity(),
     @Override
     override fun viewState() = viewStatePublishSubject
 
-    abstract fun getPresenter(): IBasePresenter
+    abstract fun getPresenter(): T
 }
